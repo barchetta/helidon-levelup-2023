@@ -35,9 +35,9 @@ virtual threads vs more complex reactive APIs.
 
 1. Download and unzip Helidon lab example
    1. https://github.com/barchetta/helidon-levelup-2023/archive/refs/heads/main.zip
-   1. This example contains two applications (microservices). The first is based on 
-      Helidon Nima with virtual threads. The second is based on Helidon's Reactive API
-      using platform threads.
+   2. This example contains two applications (microservices). The first is based on 
+      Helidon Nima WebServer with virtual threads. The second is based on Helidon's Reactive 
+      WebServer that uses Netty and an event loop with traditional threads.
 2. Build, run and exercise each of the applications
    1. Build both apps from top `mvn clean package -DskipTests`
    2. Run the blocking (Nima) version of the app
