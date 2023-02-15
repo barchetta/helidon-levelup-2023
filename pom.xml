@@ -58,52 +58,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <dependencies>
-        <dependency>
-            <groupId>io.helidon.nima.webserver</groupId>
-            <artifactId>helidon-nima-webserver</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.nima.webclient</groupId>
-            <artifactId>helidon-nima-webclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.nima.http2</groupId>
-            <artifactId>helidon-nima-http2-webclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.nima.http2</groupId>
-            <artifactId>helidon-nima-http2-webserver</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.nima.http.media</groupId>
-            <artifactId>helidon-nima-http-media-jsonp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.nima.observe</groupId>
-            <artifactId>helidon-nima-observe-health</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.health</groupId>
-            <artifactId>helidon-health-checks</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.helidon.nima.testing.junit5</groupId>
-            <artifactId>helidon-nima-testing-junit5-webserver</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <build>
         <pluginManagement>
             <plugins>
