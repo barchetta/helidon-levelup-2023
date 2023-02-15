@@ -52,13 +52,13 @@ virtual threads vs more complex reactive APIs.
       1. `java --enable-preview -jar reactive/target/example-nima-reactive.jar`
       2. (repeat steps above)
 3. Browse the source 
-   1. See how endpoints are implemented in each version of the app. Edit these two files:
+   1. See how endpoints are implemented in each version of the app. Browse these two files:
       1. `nima/src/main/java/io/examples/helidon/nima/BlockingService.java`
-      2. `reactive/src/main/java/io/examples/helidon/nima/BlockingService.java`
+      2. `reactive/src/main/java/io/examples/helidon/reactive/ReactiveService.java`
    3. See that reactive code is more complicated than blocking (Virtual Thread)
       1. Check methods `sequence` and `parallel` in `BlockingService` and `ReactiveService` respectively. See if you understand how they work!
 4. Modify the `one` endpoint
-   1. Edit `BlockService` and `ReactiveService` method `one` replacing the empty line by
+   1. Edit the method named `one` in `nima/src/main/java/io/examples/helidon/nima/BlockingService.java/BlockService` and `reactive/src/main/java/io/examples/helidon/reactive/ReactiveService.java` and replace the empty line with
       `System.out.println("## one " + Thread.currentThread());`
    2. Rebuild, rerun and verify server output when accessing `/one` on each application
       1. For Nima the thread will be a `VirtualThread`, for reactive it will be a Netty platform thread: `Thread[#33,nioEventLoopGroup-3-1,10,main]` 
@@ -66,8 +66,8 @@ virtual threads vs more complex reactive APIs.
 5. Stack traces in reactive and blocking apps are very different
    1. Run each of the applications as shown in previous steps
    2. Force an exception by running the following command (`count` must be an integer!)
-      1. curl http://localhost:57955/parallel?count=foo
-      2. Compare stack traces for each app
+      1. `curl http://localhost:<port>/parallel?count=foo`
+      2. Look back in the terminal running the server and compare stack traces for each app
 
 ## Part 3: MicroProfile Running on Virtual Threads
 
@@ -83,7 +83,7 @@ new Helidon Nima WebServer using virtual threads.
    1. Select "Helidon MP", click "Next"
    2. Select "Quickstart", click "Next"
    3. Select "Jackson", click "Next"
-   4. Click "Download" . Here and in the rest of the tutorial "myproject" will be used as the name of your project.
+   4. Click "Download". Here and in the rest of the tutorial "myproject" will be used as the name of your project.
 2. Open Project
    1. Uzip "myproject.zip" to a desired location
    2. Open the project in your favorite IDE if desired.
@@ -92,8 +92,6 @@ new Helidon Nima WebServer using virtual threads.
    2. Run the application: `java -jar target/myproject.jar`
    3. In another window exercise the application
       ```
-      curl -X GET http://localhost:8080/simple-greet
-      {"message":"Hello World!"}
       curl -X GET http://localhost:8080/greet
       {"message":"Hello World!"}
       curl -X GET http://localhost:8080/greet/Joe
@@ -107,8 +105,9 @@ new Helidon Nima WebServer using virtual threads.
       System.out.println("Running on thread " + Thread.currentThread());
       ```
    3. Rebuild, run and exercise the application as described in the previous step.
-   4. Note that the thread is named `helidon-server-n`. This is a platform thread in a 
-      threadpool created by Helidon to handle JAX-RS requests.
+   4. Look at the server output in the terminal where you started the server. Note
+      that the thread is named `helidon-server-n`. This is a traditional platform
+      thread in a threadpool created by Helidon to handle JAX-RS requests.
    5. Stop the application with `CTRL-C`
 5. Now change the project to use 4.0.0-ALPHA4
    1. Edit `pom.xml` and change the parent pom from `3.1.N`. to `4.0.0-ALPHA4`:
@@ -118,7 +117,7 @@ new Helidon Nima WebServer using virtual threads.
    2. Edit `src/main/resources/logging.properties` and change `io.helidon.common.HelidonConsoleHandler` to `io.helidon.logging.jul.HelidonConsoleHandler`
 6. Your application has now been migrated to Helidon 4! Build the application as described previously.
 7. Run the application with `java --enable-preview  -jar target/myproject.jar`
-8. Note that the thread is now a `VirtualThread`. 
+8. Look at the server output and note that the thread is now a `VirtualThread`. 
 9. Stop the application with `CTRL-C`
 
 ### Deploy to OCI
