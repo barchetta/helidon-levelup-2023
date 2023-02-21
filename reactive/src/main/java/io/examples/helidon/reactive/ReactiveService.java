@@ -1,9 +1,7 @@
 package io.examples.helidon.reactive;
 
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Function;
 
 import io.helidon.common.reactive.Multi;
 import io.helidon.common.reactive.Single;
@@ -65,20 +63,16 @@ class ReactiveService implements Service {
     }
 
     /**
-     * Calls remote service {@code count} concurrently using an executor
-     * of virtual threads.
+     * Calls remote service {@code count} times concurrently.
      *
      * @param req the request
      * @param res the response
-     * @throws Exception if an error occurs
      */
     private void parallel(ServerRequest req, ServerResponse res) {
         int count = count(req);
 
         Multi.range(0, count)
-                .flatMap(i -> Single.create(CompletableFuture.supplyAsync(
-                                () -> client().get().request(String.class), EXECUTOR))
-                        .flatMap(Function.identity()))
+                .flatMap(i -> client.get().request(String.class), 32, false, 32)
                 .collectList()
                 .map(it -> "Combined results: " + it)
                 .onError(res::send)

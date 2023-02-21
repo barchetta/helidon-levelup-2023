@@ -68,6 +68,6 @@ public class ReactiveMain {
         int sleepMillis = RANDOM.nextInt(500);
         int counter = COUNTER.incrementAndGet();
 
-        SCHEDULED_EXECUTOR.schedule(() -> res.send("remote_" + counter), sleepMillis, TimeUnit.MILLISECONDS);
+        SCHEDULED_EXECUTOR.schedule(() -> res.send("remote_" + counter), 1000, TimeUnit.MILLISECONDS);
     }
 }
